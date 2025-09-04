@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "private": true,
   "packageManager": "pnpm@10.4.1",
-  "description": "告别繁琐的命令行操作，让前端开发如丝般顺滑！",
+  "description": "Front end project quick launcher",
   "author": "Voyoro",
   "license": "MIT",
   "funding": "https://github.com/Voyoro/RunX.git",
@@ -80,6 +80,11 @@
         "RunX.command": {
           "type": "string",
           "description": "If your project's startup command is unified, you can directly specify the startup command for the default project"
+        },
+        "RunX.excludePlayground": {
+          "type": "boolean",
+          "default": true,
+          "description": "Exclude the playground package from quick start in monorepo projects"
         }
       }
     }
@@ -118,5 +123,8 @@
     "vitest": "^3.0.5",
     "vscode-ext-gen": "^1.0.0",
     "vsxpub": "^0.1.0"
+  },
+  "dependencies": {
+    "package-manager-detector": "^1.3.0"
   }
 }
