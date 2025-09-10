@@ -25,11 +25,11 @@ const { activate, deactivate } = defineExtension(async () => {
     alignment: configs.iconLocation.value === 'left' ? 1 : 2,
     priority: configs.iconLocation.value === 'left' ? Number.MAX_VALUE : -Number.MIN_VALUE,
     tooltip: 'Quick Start Project',
-    command: 'myExtension.startProject',
+    command: 'RunX.startProject',
     color: '#4CAF50',
   })
 
-  useCommand('myExtension.startProject', async () => {
+  useCommand('RunX.startProject', async () => {
     const root = useWorkspaceFolders()
     if (!root.value) {
       window.showErrorMessage(`Please open the project`)

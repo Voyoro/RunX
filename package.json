@@ -2,7 +2,7 @@
   "publisher": "Voyoro",
   "name": "RunX",
   "displayName": "RunX",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "private": true,
   "packageManager": "pnpm@10.4.1",
   "description": "Front end project quick launcher",
@@ -34,20 +34,21 @@
     "vscode": "^1.97.0"
   },
   "activationEvents": [
-    "onStartupFinished"
+    "onStartupFinished",
+    "workspaceContains:**/package.json"
   ],
   "contributes": {
     "menus": {
       "editor/title": [
         {
-          "command": "myExtension.startProject",
+          "command": "RunX.startProject",
           "group": "navigation"
         }
       ]
     },
     "commands": [
       {
-        "command": "myExtension.startProject",
+        "command": "RunX.startProject",
         "title": "Start Project",
         "icon": {
           "light": "res/logo.png",
@@ -115,6 +116,7 @@
     "esno": "^4.8.0",
     "fs-extra": "^11.3.1",
     "ovsx": "^0.10.5",
+    "package-manager-detector": "^1.3.0",
     "pnpm": "^10.4.1",
     "reactive-vscode": "^0.2.10",
     "tsdown": "^0.9.6",
@@ -123,8 +125,5 @@
     "vitest": "^3.0.5",
     "vscode-ext-gen": "^1.0.0",
     "vsxpub": "^0.1.0"
-  },
-  "dependencies": {
-    "package-manager-detector": "^1.3.0"
   }
 }
