@@ -4,7 +4,7 @@ import fs from 'fs-extra'
 import { load } from 'js-yaml'
 import { detect as detectPM } from 'package-manager-detector'
 import { readPackageJSON } from 'pkg-types'
-import { useLogger, useTerminal } from 'reactive-vscode'
+import { useActiveTerminal, useControlledTerminal, useLogger, useTerminal } from 'reactive-vscode'
 import { window } from 'vscode'
 import { displayName } from './generated/meta'
 
@@ -112,18 +112,25 @@ export async function executeScript(dir: string, script: string, message?: strin
         return undefined
       },
     }) || {}
-    const terminal = useTerminal({
-      name: 'RunX Terminal',
-      cwd,
-    })
-    terminal.show()
-    setTimeout(() => {
-      terminal.sendText(`${agent} run ${script}`)
-    }, 10)
+    const activeTerminal = useActiveTerminal()
+    if (activeTerminal.value?.state.shell === 'node') {
+      const terminal = useControlledTerminal({
+        name: 'RunX Terminal',
+        cwd,
+      })
+      terminal.show()
+      setTimeout(() => {
+        terminal.sendText(`${agent} run ${script}`)
+      }, 10)
 
-    message && window.showInformationMessage(message)
-    return {
-      terminal,
+      message && window.showInformationMessage(message)
+    }
+    else {
+      activeTerminal.value?.show()
+      setTimeout(() => {
+        activeTerminal.value?.sendText(`${agent} run ${script}`)
+      }, 10)
+      message && window.showInformationMessage(message)
     }
   }
   catch (error) {
